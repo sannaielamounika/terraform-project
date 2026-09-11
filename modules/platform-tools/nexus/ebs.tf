@@ -5,6 +5,10 @@ resource "aws_ebs_volume" "data" {
   encrypted         = true
   kms_key_id        = var.kms_key_arn
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = merge(local.common_tags, {
     Name = "${local.name_prefix}-data-volume"
   })
@@ -14,4 +18,7 @@ resource "aws_volume_attachment" "data_attach" {
   device_name = var.data_device_name
   volume_id   = aws_ebs_volume.data.id
   instance_id = aws_instance.this.id
+
+  stop_instance_before_detaching = true
+  force_detach                   = true
 }
