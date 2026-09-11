@@ -1,13 +1,13 @@
-resource "aws_iam_role" "this" {
-  name = "${local.name_prefix}-role"
+resource \ aws_iam_role\ \this\ {
+  name = \\-role\
 
   assume_role_policy = jsonencode({
-    Version = "2012-10-17"
+    Version = \2012-10-17\
     Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
+      Action = \sts:AssumeRole\
+      Effect = \Allow\
       Principal = {
-        Service = "ec2.amazonaws.com"
+        Service = \ec2.amazonaws.com\
       }
     }]
   })
@@ -15,12 +15,22 @@ resource "aws_iam_role" "this" {
   tags = local.common_tags
 }
 
-resource "aws_iam_role_policy_attachment" "ssm" {
+resource \aws_iam_role_policy_attachment\ \ssm\ {
   role       = aws_iam_role.this.name
   policy_arn = var.ssm_policy_arn
 }
 
-resource "aws_iam_instance_profile" "this" {
-  name = "${local.name_prefix}-profile"
+resource \aws_iam_role_policy_attachment\ \ecr\ {
+  role       = aws_iam_role.this.name
+  policy_arn = \arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser\
+}
+
+resource \aws_iam_role_policy_attachment\ \eks\ {
+  role       = aws_iam_role.this.name
+  policy_arn = \arn:aws:iam::aws:policy/AmazonEKSClusterPolicy\
+}
+
+resource \aws_iam_instance_profile\ \this\ {
+  name = \\-profile\
   role = aws_iam_role.this.name
 }
