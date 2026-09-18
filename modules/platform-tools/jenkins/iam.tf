@@ -38,7 +38,7 @@ resource "aws_iam_role_policy_attachment" "ssm" {
 
 resource "aws_iam_role_policy_attachment" "ecr" {
   role     = aws_iam_role.this.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSContainerRegistryPowerUser"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPowerUser"
 }
 
 resource "aws_iam_role_policy_attachment" "eks" {
